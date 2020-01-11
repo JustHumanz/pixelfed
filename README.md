@@ -76,5 +76,5 @@ docker exec -it pixelfed_app_1 php artisan config:cache
 docker exec -it pixelfed_app_1 php artisan migrate
 #yes
 ```
-And done~
+And done~  
 <img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/5.png">
