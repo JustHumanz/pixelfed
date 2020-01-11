@@ -43,3 +43,13 @@ Discovery](https://nlnet.nl/discovery/), part of the [Next Generation
 Internet](https://ngi.eu) initiative.
 - [<img src="https://td-misc-public.s3.amazonaws.com/OscillasLogo.png" width="100px">](https://oscillas.com/)
 - Managed Pixelfed Hosting by [Spacebear](https://app.spacebear.ee/)
+
+## Build from Docker compose
+
+```
+cd ~/
+git clone https://github.com/JustHumanz/pixelfed
+cd pixelfed
+cp .env.example .env
+vim .env
+```
