@@ -58,4 +58,23 @@ Change the domain name if you want
 Setup database username and password  
 <img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/2.png">  
 
-Then setup docker-compose.yml
+Then setup docker-compose.yml  
+If you have a traefik running, uncomment this to expose Pixelfed  
+<img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/3.png">  
+
+If you have a standard reverse proxy, uncommit this to expose Pixelfed and change the port with your reverse proxy
+<img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/4.png">
+
+
+Now we should be able to start the services and generate an APP_KEY.  
+```
+docker exec -it pixelfed_app_1 php artisan key:generate
+```
+And now we can restart, clear the cache and run the migrations on the database.
+```
+docker exec -it pixelfed_app_1 php artisan config:cache
+docker exec -it pixelfed_app_1 php artisan migrate
+#yes
+```
+And done~
+<img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/5.png">
