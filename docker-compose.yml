@@ -26,16 +26,24 @@ services:
     #   - traefik.frontend.rule=Host:your.url
     #   - traefik.port=80
     ## If you have a standard reverse proxy, uncommit this to expose Pixelfed
-    # ports:
-    #   - "127.0.0.1:8080:80"
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
     env_file:
       - ./.env
     volumes:
       - "app-storage:/var/www/storage"
       - "app-bootstrap:/var/www/bootstrap"
+      - ./.env:/var/www/.env
     networks:
-      - external
-      - internal
+      internal:
+        ipv4_address: 10.10.10.2
+      #external:
+      #  true
+    extra_hosts:
+      - "worker:10.10.10.3"
+      - "db:10.10.10.4"
+      - "redis:10.10.10.5"
 
   worker:  # Comment this whole block if HORIZON_EMBED is true.
     # Comment to use dockerhub image
@@ -51,15 +59,18 @@ services:
       - "app-storage:/var/www/storage"
       - "app-bootstrap:/var/www/bootstrap"
     networks:
-      - external  # Required for ActivityPub
-      - internal
+      #external:  # Required for ActivityPub
+      #  true
+      internal:
+        ipv4_address: 10.10.10.3
     command: gosu www-data php artisan horizon
     
   db:
     image: mysql:8.0
     restart: unless-stopped
     networks:
-      - internal
+      internal:
+         ipv4_address: 10.10.10.4
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_DATABASE=pixelfed
@@ -75,7 +86,8 @@ services:
     volumes:
       - "redis-data:/data"
     networks:
-      - internal
+      internal:
+         ipv4_address: 10.10.10.5
 
 # Adjust your volume data in order to store data where you wish
 volumes:
@@ -86,6 +98,8 @@ volumes:
 
 networks:
   internal:
-    internal: true
-  external:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.10.0/24
