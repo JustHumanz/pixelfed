@@ -55,5 +55,7 @@ vim .env
 ```
 Change the domain name if you want  
 <img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/1.png">  
-setup database password
+Setup database username and password  
 <img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/2.png">  
+
+Then setup docker-compose.yml
