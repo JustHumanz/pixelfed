@@ -63,8 +63,16 @@ If you have a traefik running, uncomment this to expose Pixelfed
 <img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/3.png">  
 
 If you have a standard reverse proxy, uncommit this to expose Pixelfed and change the port with your reverse proxy
-<img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/4.png">
+<img src="https://raw.githubusercontent.com/JustHumanz/pixelfed/dev/img/4.png">  
 
+It's show time
+```
+docker-compose up -d
+```
+wait until completed and check it
+```
+docker ps -a
+```
 
 Now we should be able to start the services and generate an APP_KEY.  
 ```
